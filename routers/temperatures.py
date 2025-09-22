@@ -40,7 +40,7 @@ async def fetch_temperature_for_city(city_name: str) -> Optional[float]:
             return None
 
 
-@router.post("/update", response_model=List[schemas.Temperature])
+@router.post("/update/", response_model=List[schemas.Temperature])
 async def update_temperatures(db: Session = Depends(get_db)):
     cities = await run_in_threadpool(lambda: db.query(models.City).all())
 

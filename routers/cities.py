@@ -17,7 +17,7 @@ def read_cities(db: Session = Depends(get_db)):
     return crud.city.get_cities(db=db)
 
 
-@router.get("/cities/{city_id}", response_model=schemas.City)
+@router.get("/cities/{city_id}/", response_model=schemas.City)
 def read_city(city_id: int, db: Session = Depends(get_db)):
     db_city = crud.city.get_city(db, city_id)
     if db_city is None:
@@ -25,7 +25,7 @@ def read_city(city_id: int, db: Session = Depends(get_db)):
     return db_city
 
 
-@router.put("/cities/{city_id}", response_model=schemas.City)
+@router.put("/cities/{city_id}/", response_model=schemas.City)
 def update_city(city_id: int, city: schemas.CityUpdate, db: Session = Depends(get_db)):
     db_city = crud.city.update_city(db=db, city_id=city_id, city=city)
     if db_city is None:
@@ -33,7 +33,7 @@ def update_city(city_id: int, city: schemas.CityUpdate, db: Session = Depends(ge
     return db_city
 
 
-@router.delete("/cities/{city_id}", response_model=schemas.City)
+@router.delete("/cities/{city_id}/", response_model=schemas.City)
 def delete_city(city_id: int, db: Session = Depends(get_db)):
     db_city = crud.city.get_city(db=db, city_id=city_id)
     if db_city is None:

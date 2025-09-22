@@ -13,6 +13,3 @@ app = FastAPI(title="City Temperature API")
 
 app.include_router(cities.router)
 app.include_router(temperatures.router)
-
-
-print("KEY:", os.getenv("WEATHER_API_KEY"))
