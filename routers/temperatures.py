@@ -42,7 +42,7 @@ async def fetch_temperature_for_city(city_name: str) -> Optional[float]:
 
 @router.post("/update", response_model=List[schemas.Temperature])
 async def update_temperatures(db: Session = Depends(get_db)):
-    cities = db.query(models.City).all()
+    cities = await run_in_threadpool(lambda: db.query(models.City).all())
 
     tasks = [fetch_temperature_for_city(str(city.name)) for city in cities]
     temps = await asyncio.gather(*tasks)
